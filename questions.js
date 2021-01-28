@@ -1,53 +1,55 @@
 var homeQuestions= [
     {
-        homeQuestionText: "",
-        choices: [],
+        questionText: "What meal is it?",
+        choices: ["Breakfast", "Lunch", "Dinner", "Brunch", "Hangover"]
     },
 
     {
-        homeQuestionText: "",
-        choices: [],
+        questionText: "Which type of food are you hungry for?",
+        choices: ["American", "Italian",],
+  
     },
 
     {
-        homeQuestionText: "",
-        choices: [],
+        questionText: "Do you have a sugar craving? Would you like a desert?",
+        choices: ["Yes", "No"],
     },
 
     {
-        homeQuestionText: "",
-        choices: [],
+        questionText: "Are you on a diet?",
+        choices: ["Yes", "No",],
     },
 
     {
-        homeQuestionText: "",
-        choices: [],
+        questionText: "Do you want to get drunk",
+        choices: ["Yes", "No", "Maybe"],
     },
 ];
 
 var restaurantQuestions= [
     {
-        restaurantQuestionText: "",
-        choices: [],
+        questionText: "R What meal is it?",
+        choices: ["R Breakfast", "Lunch", "Dinner", "Brunch", "Hangover"]
     },
 
     {
-        restaurantQuestionText: "",
-        choices: [],
+        questionText: "R Which type of food are you hungry for?",
+        choices: ["R American", "Italian",],
+  
     },
 
     {
-        restaurantQuestionText: "",
-        choices: [],
+        questionText: "R Do you have a sugar craving? Would you like a desert?",
+        choices: ["R Yes", "No"],
     },
 
     {
-        restaurantQuestionText: "",
-        choices: [],
+        questionText: "R Are you on a diet?",
+        choices: ["R Yes", "No",],
     },
 
     {
-        restaurantQuestionText: "",
-        choices: [],
+        questionText: "R Do you want to get drunk",
+        choices: ["R Yes", "No", "Maybe"],
     },
 ];
