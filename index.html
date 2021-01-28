@@ -2,145 +2,75 @@
 <html>
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Food Application</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
-  <link rel="stylesheet" href="style.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dining Decider</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-  <section class="section">
-    <!-- navbar container -->
-    <div class="container">
-      <nav class="navbar is-light" role="navigation" aria-label="main navigation">
-        <div class="navbar-brand">
-          <a class="navbar-item" href="https://bulma.io">
-            <img src="https://bulma.io/images/bulma-logo.png"
-              alt="Bulma: Free, open source, and modern CSS framework based on Flexbox" width="112" height="28">
-          </a>
-          <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-          </a>
-        </div>
-      </nav>
-    </div>
-
-    <!-- main container for intro text, main photo, starting buttons -->
-    <div class="container">
-      <div class="card show">
-        <div class="has-text-centered">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Culpa nobis harum obcaecati ex quia voluptatibus,
-          repellendus atque quibusdam a eveniet necessitatibus corrupti nulla vel quos, quo asperiores cum libero rem?
-        </div>
-        <div class="card-image">
-          <figure class="image is-2by1">
-            <img src="assets/pexels-robin-stickel-70497.jpg" alt="Placeholder image">
-          </figure>
-        </div>
-        <button class="button is-rounded is-danger is-large">Eat at Home</button>
-        <button class="button is-rounded is-danger is-large is-pulled-right">Eat Out</button>
-      </div>
-      <br>
-
-      <div class="columns">
-        <!-- form for eat at home questions -->
-        <div class="column hide">
-          <h2>Eat at Home Questions</h2>
-          <div class="field">
-            <label class="label">Question 1</label>
-            <div class="control has-icons-left has-icons-right">
-              <input class="input" type="text" placeholder="Normal">
-              <span class="icon is-small is-left">
-                <i class="fas fa-envelope fa-xs"></i>
-              </span>
-              <span class="icon is-small is-right">
-                <i class="fas fa-check fa-xs"></i>
-              </span>
-            </div>
-          </div>
-
-          <div class="field">
-            <label class="label">Question 2</label>
-            <div class="control has-icons-left has-icons-right">
-              <input class="input" type="text" placeholder="Normal">
-              <span class="icon is-small is-left">
-                <i class="fas fa-envelope"></i>
-              </span>
-              <span class="icon is-small is-right">
-                <i class="fas fa-check fa-xs"></i>
-              </span>
-            </div>
-          </div>
-
-          <div class="field">
-            <label class="label">Question 3</label>
-            <div class="control has-icons-left has-icons-right">
-              <input class="input" type="text" placeholder="Normal">
-              <span class="icon is-small is-left">
-                <i class="fas fa-envelope"></i>
-              </span>
-              <span class="icon is-small is-right">
-                <i class="fas fa-check fa-xs"></i>
-              </span>
-            </div>
-          </div>
-          <div class="control">
-            <button class="button is-primary">Submit</button>
-          </div>
+    <section class="section">
+        <!-- navbar container -->
+        <div class="container">
+            <nav class="navbar is-light" role="navigation" aria-label="main navigation">
+                <div class="navbar-brand">
+                    <a class="navbar-item" href="https://bulma.io">
+                        <img src="https://bulma.io/images/bulma-logo.png"
+                            alt="Bulma: Free, open source, and modern CSS framework based on Flexbox" width="112"
+                            height="28">
+                    </a>
+                    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                    </a>
+                </div>
+            </nav>
         </div>
 
-        <!-- form for eat out questions -->
-        <div class="column hide">
-          <h2>Eat Out Questions</h2>
-          <div class="field">
-            <label class="label">Question 1</label>
-            <div class="control has-icons-left has-icons-right">
-              <input class="input" type="text" placeholder="Normal">
-              <span class="icon is-small is-left">
-                <i class="fas fa-envelope fa-xs"></i>
-              </span>
-              <span class="icon is-small is-right">
-                <i class="fas fa-check fa-xs"></i>
-              </span>
+        <!-- main container for intro text, main photo, starting buttons -->
+        <div class="container">
+            <div id="start-screen" class="card show">
+                <div class="has-text-centered">
+                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Culpa nobis harum obcaecati ex quia
+                    voluptatibus,
+                    repellendus atque quibusdam a eveniet necessitatibus corrupti nulla vel quos, quo asperiores cum
+                    libero rem?
+                </div>
+                <div class="card-image">
+                    <figure class="image is-2by1">
+                        <img src="assets/pexels-robin-stickel-70497.jpg" alt="Placeholder image">
+                    </figure>
+                </div>
+                <button id="eat-home" class="button is-rounded is-danger is-large">Eat at Home</button>
+                <button id="eat-out" class="button is-rounded is-danger is-large is-pulled-right">Eat Out</button>
             </div>
-          </div>
+            <br>
 
-          <div class="field">
-            <label class="label">Question 2</label>
-            <div class="control has-icons-left has-icons-right">
-              <input class="input" type="text" placeholder="Normal">
-              <span class="icon is-small is-left">
-                <i class="fas fa-envelope fa-xs"></i>
-              </span>
-              <span class="icon is-small is-right">
-                <i class="fas fa-check fa-xs"></i>
-              </span>
+            <div id="questions-page" class="show">
+                <h1 id="question"></h1>
+                <br>
+                <div class="control">
+                    <ul>
+                        <li><label class="radio">
+                        <input type="radio" name="answer"><span id="ans1"></span></label></li>
+                        <li><label class="radio">
+                        <input type="radio" name="answer"><span id="ans2"></span></label></li>
+                        <label class="radio">
+                        <li><input type="radio" name="answer"><span id="ans3"></span></label></li>
+                        <label class="radio">
+                        <li><input type="radio" name="answer"><span id="ans4"></span></label></li>
+                    </ul>
+                    <br>
+                    <button id="next-button" class="button is-danger">Next</button>
+                  </div>
             </div>
-          </div>
 
-          <div class="field">
-            <label class="label">Question 3</label>
-            <div class="control has-icons-left has-icons-right">
-              <input class="input" type="text" placeholder="Normal">
-              <span class="icon is-small is-left">
-                <i class="fas fa-envelope fa-xs"></i>
-              </span>
-              <span class="icon is-small is-right">
-                <i class="fas fa-check fa-xs"></i>
-              </span>
-            </div>
-          </div>
-          <div class="control">
-            <button class="button is-primary">Submit</button>
-          </div>
         </div>
-      </div>
-    </div>
-  </section>
-  <script src="questions.js"></script>
+    </section>
+    <script src="questions.js"></script>
+    <script src="index.js"></script>
 </body>
 
 </html>
