@@ -6,7 +6,7 @@ var homeQuestions= [
 
     {
         questionText: "Which type of food are you hungry for?",
-        choices: ["American", "Italian",],
+        choices: ["African","American","British","Cajun","Caribbean","Chinese","Eastern European","European","French","German","Greek","Indian","Irish","Italian","Japanese","Jewish","Korean","Latin American","Mediterranean","Mexican","Middle Eastern","Nordic","Southern","Spanish","Thai","Vietnamese"],
   
     },
 
@@ -17,11 +17,15 @@ var homeQuestions= [
 
     {
         questionText: "Are you on a diet?",
-        choices: ["Yes", "No",],
+        choices: ["I eat what I want","Gluten Free","Ketogenic","Vegetarian","Lacto-Vegetarian","Ovo-Vegetarian","Vegan","Pescetarian","Paleo","Primal","Whole30"],
     },
 
     {
         questionText: "Do you want to get drunk",
+        choices: ["Yes", "No", "Maybe"],
+    },
+    {
+        questionText: "Cooking tools?",
         choices: ["Yes", "No", "Maybe"],
     },
 ];
