@@ -69,7 +69,7 @@ nextButton.addEventListener("click", function (event) {
 
 });
 
-// Need to make the "Eat at Home" and "Eat Out" buttons load their specific question queues. Need to have them set the startScreen to "hide" and the questionsPage to "show"
+// Eat at home button, load home questions, hide start screen and show questions page
 eatHomeBtn.addEventListener("click", function () {
     questions = homeQuestions;
     totalQuestions = questions.length;
@@ -77,6 +77,7 @@ eatHomeBtn.addEventListener("click", function () {
     questionsPage.setAttribute("class", "show");
     startScreen.setAttribute("class", "hide");
 });
+// Eat Out button, load restaurant questions, hide start screen and show questions page
 eatOutBtn.addEventListener("click", function () {
     questions = restaurantQuestions;
     totalQuestions = questions.length;
