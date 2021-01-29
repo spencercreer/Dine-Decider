@@ -9,3 +9,17 @@
 li {
     display: inline-block;
 }
+
+#eat-home-div {
+    float:left;
+    width:50%;
+    margin-top:-25%;
+    padding-left:20%;
+}
+
+#eat-out-div {
+    float:right;
+    width:50%;
+    margin-top:-25%;
+    padding-right:20%;
+}
