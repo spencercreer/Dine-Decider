@@ -17,7 +17,7 @@ var homeQuestions= [
 
     {
         questionText: "Are you on a diet?",
-        choices: ["I eat what I want","Gluten Free","Ketogenic","Vegetarian","Lacto-Vegetarian","Ovo-Vegetarian","Vegan","Pescetarian","Paleo","Primal","Whole30"],
+        choices: ["","Gluten Free","Ketogenic","Vegetarian","Vegan"],
     },
 
     {
