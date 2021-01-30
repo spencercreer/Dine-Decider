@@ -32,28 +32,33 @@ var homeQuestions= [
 
 var restaurantQuestions= [
     {
-        questionText: "R What meal is it?",
-        choices: ["R Breakfast", "Lunch", "Dinner", "Brunch", "Hangover"]
+        questionText: "What meal is it?",
+        choices: ["Breakfast", "Lunch", "Dinner", "Brunch"]
     },
 
     {
-        questionText: "R Which type of food are you hungry for?",
-        choices: ["R American", "Italian",],
+        questionText: "Which type of food are you hungry for?",
+        choices: ["American", "Italian", "Mexican"],
+  
+    },
+    {
+        questionText: "What is your price range?",
+        choices: ["1", "2", "3", "4", "5"],
   
     },
 
-    {
-        questionText: "R Do you have a sugar craving? Would you like a desert?",
-        choices: ["R Yes", "No"],
-    },
+    // {
+    //     questionText: "R Do you have a sugar craving? Would you like a desert?",
+    //     choices: ["R Yes", "No"],
+    // },
 
-    {
-        questionText: "R Are you on a diet?",
-        choices: ["R Yes", "No",],
-    },
+    // {
+    //     questionText: "R Are you on a diet?",
+    //     choices: ["R Yes", "No",],
+    // },
 
-    {
-        questionText: "R Do you want to get drunk",
-        choices: ["R Yes", "No", "Maybe"],
-    },
+    // {
+    //     questionText: "R Do you want to get drunk",
+    //     choices: ["R Yes", "No", "Maybe"],
+    // },
 ];
