@@ -10,16 +10,20 @@ li {
     display: inline-block;
 }
 
+#hero-image{
+
+}
+
 #eat-home-div {
     float:left;
     width:50%;
-    margin-top:-25%;
+    margin-top:-50%;
     padding-left:20%;
 }
 
 #eat-out-div {
     float:right;
     width:50%;
-    margin-top:-25%;
+    margin-top:-50%;
     padding-right:20%;
 }

@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Dining Decider</title>
+    <title>Decider Diner</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -13,12 +13,11 @@
     <section class="section">
         <!-- navbar container -->
         <div class="container">
-            <nav class="navbar is-light" role="navigation" aria-label="main navigation">
+            <nav class="navbar is-light" role="navigation" aria-label="main navigation" style="background-color: #AAF0E5">
                 <div class="navbar-brand">
-                    <a class="navbar-item" href="https://bulma.io">
-                        <img src="https://bulma.io/images/bulma-logo.png"
-                            alt="Bulma: Free, open source, and modern CSS framework based on Flexbox" width="112"
-                            height="28">
+                    <a class="navbar-item" href="./index.html">
+                        <img src="assets/Logo-color-cropped.png"
+                            alt="Decider Diner Logo">
                     </a>
                     <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
                         <span aria-hidden="true"></span>
@@ -33,19 +32,16 @@
         <div class="container">
             <div id="start-screen" class="card show">
                 <div class="has-text-centered">
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Culpa nobis harum obcaecati ex quia
-                    voluptatibus,
-                    repellendus atque quibusdam a eveniet necessitatibus corrupti nulla vel quos, quo asperiores cum
-                    libero rem?
+                    The Decider Diner is where you go when you don't know what you want to eat. Click the "Eat In" button if you want recipe suggestions and click the "Eat Out" button if you would like to find local restaurants.
                 </div>
                 <div class="card-image">
                     <figure class="image is-2by1">
-                        <img src="assets/pexels-robin-stickel-70497.jpg" alt="Placeholder image">
+                        <img id="hero-image" src="assets/Cosmic-Diner-Retro.jpg" alt="Placeholder image">
                             <div id="eat-home-div">
-                                <button id="eat-home-btn" class="button is-rounded is-danger is-large">Eat at Home</button>
+                                <button id="eat-home-btn" class="button is-rounded is-danger is-large" style="background-color: #F01D05;">Eat In</button>
                             </div>
                             <div id="eat-out-div">
-                                <button id="eat-out-btn" class="button is-rounded is-danger is-large is-pulled-right">Eat Out</button>
+                                <button id="eat-out-btn" class="button is-rounded is-danger is-large is-pulled-right" style="background-color: #F01D05;">Eat Out</button>
                             </div>
                         </img>
                     </figure>
@@ -65,7 +61,7 @@
                     <form id="control">
                     </form>
                     <br>
-                    <button id="next-button" class="button is-danger">Next</button>
+                    <button id="next-button" class="button is-danger"style="background-color: #F01D05;">Next</button>
                   </div>
             </div>
 
