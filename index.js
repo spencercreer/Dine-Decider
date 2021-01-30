@@ -142,121 +142,119 @@ function callRecipeAPI() {
 function callRestaurantAPI() {
     console.log("hello");
 
-    
+    // document.querySelector('#search').addEventListener('submit', function (event) {
+    //     event.preventDefault()
+    //     var searchTerm = document.querySelector('#search-term').value.trim()
+    //     console.log(searchTerm);
+    //     // var key = "0494ac0d19d3768669eba3cb4cc8a747";
+    //     // var city = "Salt Lake City";
 
-// document.querySelector('#search').addEventListener('submit', function (event) {
-//     event.preventDefault()
-//     var searchTerm = document.querySelector('#search-term').value.trim()
-//     console.log(searchTerm);
-//     // var key = "0494ac0d19d3768669eba3cb4cc8a747";
-//     // var city = "Salt Lake City";
+    //     var queryURL = "https://developers.zomato.com/api/v2.1/locations?query=" + searchTerm;
 
-//     var queryURL = "https://developers.zomato.com/api/v2.1/locations?query=" + searchTerm;
+    //     $.ajax({
+    //         url: queryURL,
+    //         method: "GET",
+    //         headers: {
+    //             "user-key": "0494ac0d19d3768669eba3cb4cc8a747",
+    //             "content-type": "application/json",
+    //         }
+    //     }).then(function (cityInfo) {
+    //         console.log(queryURL);
+    //         console.log(cityInfo);
 
-//     $.ajax({
-//         url: queryURL,
-//         method: "GET",
-//         headers: {
-//             "user-key": "0494ac0d19d3768669eba3cb4cc8a747",
-//             "content-type": "application/json",
-//         }
-//     }).then(function (cityInfo) {
-//         console.log(queryURL);
-//         console.log(cityInfo);
 
-    
-//         console.log(cityInfo.location_suggestions[0].latitude);
-//         console.log(cityInfo.location_suggestions[0].longitude);
-//         console.log(cityInfo.location_suggestions[0].entity_id);
-//         console.log(cityInfo.location_suggestions[0].entity_type);
+    //         console.log(cityInfo.location_suggestions[0].latitude);
+    //         console.log(cityInfo.location_suggestions[0].longitude);
+    //         console.log(cityInfo.location_suggestions[0].entity_id);
+    //         console.log(cityInfo.location_suggestions[0].entity_type);
 
-//         var cityId = cityInfo.location_suggestions[0].entity_id;
-//         var cityType = cityInfo.location_suggestions[0].entity_type;
+    //         var cityId = cityInfo.location_suggestions[0].entity_id;
+    //         var cityType = cityInfo.location_suggestions[0].entity_type;
 
-//         var restURL1 = "https://developers.zomato.com/api/v2.1/location_details?entity_id=" + cityId + "&entity_type=" + cityType;
+    //         var restURL1 = "https://developers.zomato.com/api/v2.1/location_details?entity_id=" + cityId + "&entity_type=" + cityType;
 
-//         $.ajax({
-//             url: restURL1,
-//             method: "GET",
-//             headers: {
-//                 "user-key": "0494ac0d19d3768669eba3cb4cc8a747",
-//                 "content-type": "application/json",
-//             }
-//         }).then(function (restaurantAPI1) {
-//             console.log(restaurantAPI1);
-//             console.log(restaurantAPI1.best_rated_restaurant[0].restaurant.photos_url);
+    //         $.ajax({
+    //             url: restURL1,
+    //             method: "GET",
+    //             headers: {
+    //                 "user-key": "0494ac0d19d3768669eba3cb4cc8a747",
+    //                 "content-type": "application/json",
+    //             }
+    //         }).then(function (restaurantAPI1) {
+    //             console.log(restaurantAPI1);
+    //             console.log(restaurantAPI1.best_rated_restaurant[0].restaurant.photos_url);
 
-//             var restImg = $("<img>");
-//             restImg.attr("src", restaurantAPI1.best_rated_restaurant[0].restaurant.photos_url);
-//             $("#imgTest").append(restImg)
+    //             var restImg = $("<img>");
+    //             restImg.attr("src", restaurantAPI1.best_rated_restaurant[0].restaurant.photos_url);
+    //             $("#imgTest").append(restImg)
 
-//         })
+    //         })
 
-//         var latitude = cityInfo.location_suggestions[0].latitude;
-//         var longitude = cityInfo.location_suggestions[0].longitude;
+    //         var latitude = cityInfo.location_suggestions[0].latitude;
+    //         var longitude = cityInfo.location_suggestions[0].longitude;
 
-//         var restURL2 = "https://developers.zomato.com/api/v2.1/search?lat=" + latitude + "&lon=" + longitude;
+    //         var restURL2 = "https://developers.zomato.com/api/v2.1/search?lat=" + latitude + "&lon=" + longitude;
 
-//         $.ajax({
-//             url: restURL2,
-//             method: "GET",
-//             headers: {
-//                 "user-key": "0494ac0d19d3768669eba3cb4cc8a747",
-//                 "content-type": "application/json",
-//             }
-//         }).then(function (restaurantAPI2) {
-//             console.log(restaurantAPI2);
-//         })
+    //         $.ajax({
+    //             url: restURL2,
+    //             method: "GET",
+    //             headers: {
+    //                 "user-key": "0494ac0d19d3768669eba3cb4cc8a747",
+    //                 "content-type": "application/json",
+    //             }
+    //         }).then(function (restaurantAPI2) {
+    //             console.log(restaurantAPI2);
+    //         })
 
-        
-//     })
 
-// })
+    //     })
+
+    // })
 
 
 
-        // // These variables will need to change based on the user's response but for now I hard coded them in
-        // var meal = answers[0];
-        // // var meal = "chicken";
-        // var cuisine = answers[1];
-        // var dessert = answers[2];
-        // var diet = answers[3];
-        // var alcohol = answers[4];
-        // var cookingTools = answers[5];
-        // console.log(meal);
-        // console.log(cuisine);
-        // console.log(dessert);
-        // console.log(diet);
-        // console.log(alcohol);
-        // console.log(cookingTools);
+    // // These variables will need to change based on the user's response but for now I hard coded them in
+    // var meal = answers[0];
+    // // var meal = "chicken";
+    // var cuisine = answers[1];
+    // var dessert = answers[2];
+    // var diet = answers[3];
+    // var alcohol = answers[4];
+    // var cookingTools = answers[5];
+    // console.log(meal);
+    // console.log(cuisine);
+    // console.log(dessert);
+    // console.log(diet);
+    // console.log(alcohol);
+    // console.log(cookingTools);
 
-        // spoonacular URL
-        // var APIkey = "b76df6aa9f3f42a2850529cba2ce87ae";
-        // var APIkey = "674f6fda78664e8d8eb605383a63dc97"; //This is a second APIKey if we have too many calls
-        // var queryURL = "https://api.spoonacular.com/recipes/complexSearch?query=" + meal + "&cuisine=" + cuisine + "&number=1&addRecipeInformation=true&addRecipeNutrition=true&apiKey=" + APIkey;
+    // spoonacular URL
+    // var APIkey = "b76df6aa9f3f42a2850529cba2ce87ae";
+    // var APIkey = "674f6fda78664e8d8eb605383a63dc97"; //This is a second APIKey if we have too many calls
+    // var queryURL = "https://api.spoonacular.com/recipes/complexSearch?query=" + meal + "&cuisine=" + cuisine + "&number=1&addRecipeInformation=true&addRecipeNutrition=true&apiKey=" + APIkey;
 
-        // AJAX call spoonacular API
-        // $.ajax({
-        //     url: queryURL,
-        //     method: "GET"
-        // }).then(function(response) {
+    // AJAX call spoonacular API
+    // $.ajax({
+    //     url: queryURL,
+    //     method: "GET"
+    // }).then(function(response) {
 
-        //     // Log the queryURL and response
-        //     console.log(queryURL);
-        //     console.log(response);
+    //     // Log the queryURL and response
+    //     console.log(queryURL);
+    //     console.log(response);
 
-        // Below is an example of displaying to the results page. It will need to be modified according to our results page
+    // Below is an example of displaying to the results page. It will need to be modified according to our results page
 
-        // $(".recipe-title1").text(response.results[0].title);
-        // $(".recipe-image1").attr("src",response.results[0].image);
-        // $(".cook-time1").text("Time: " + response.results[0].readyInMinutes + " minutes");
-        // $(".servings1").text("Servings: " + response.results[0].servings);
-        // $(".calories1").text("Calories: " + response.results[0].nutrition.nutrients[0].amount + " cal");
-        // $(".carbs1").text("Carbohydrates: " + response.results[0].nutrition.nutrients[3].amount + " g");
-        // $(".protein1").text("Protein: " + response.results[0].nutrition.nutrients[8].amount + " g");
-        // $(".fat1").text("Fat: " + response.results[0].nutrition.nutrients[1].amount + " g");
-        // $(".recipe-url1").text("Recipe Link")
-        // $(".recipe-url1").attr("href",response.results[0].sourceUrl)
-        // var recipeId = response.results[0].id;
-        // })
-    }
+    // $(".recipe-title1").text(response.results[0].title);
+    // $(".recipe-image1").attr("src",response.results[0].image);
+    // $(".cook-time1").text("Time: " + response.results[0].readyInMinutes + " minutes");
+    // $(".servings1").text("Servings: " + response.results[0].servings);
+    // $(".calories1").text("Calories: " + response.results[0].nutrition.nutrients[0].amount + " cal");
+    // $(".carbs1").text("Carbohydrates: " + response.results[0].nutrition.nutrients[3].amount + " g");
+    // $(".protein1").text("Protein: " + response.results[0].nutrition.nutrients[8].amount + " g");
+    // $(".fat1").text("Fat: " + response.results[0].nutrition.nutrients[1].amount + " g");
+    // $(".recipe-url1").text("Recipe Link")
+    // $(".recipe-url1").attr("href",response.results[0].sourceUrl)
+    // var recipeId = response.results[0].id;
+    // })
+}
