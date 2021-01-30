@@ -16,7 +16,7 @@ var nextButton = document.getElementById("next-button");
 var displayQuestion = document.getElementById("question");
 
 // cycle through the questions
-function getQuestions(questionIndex,questions) {
+function getQuestions(questionIndex, questions) {
     var runQuestions = questions[questionIndex];
     console.log(runQuestions);
     displayQuestion.textContent = runQuestions.questionText
@@ -50,13 +50,13 @@ nextButton.addEventListener("click", function (event) {
     var selectedOption = document.querySelector('input[type=radio]:checked');
     answers.push(selectedOption.value)
     console.log(answers);
-    if(currentQuestion<questions.length){
+    if (currentQuestion < questions.length) {
         document.getElementById("control").innerHTML = "";
         getQuestions(currentQuestion, questions);
-    } else{
-        if(eatHome === true) {
+    } else {
+        if (eatHome === true) {
             callRecipeAPI();
-        } else{
+        } else {
             callRestaurantAPI();
         }
         // Hide questionsPage and show resultsPage
@@ -92,7 +92,7 @@ searchBtn.addEventListener("click", function () {
 })
 
 // Gets recipe data from the spoonacular API
-function callRecipeAPI(){
+function callRecipeAPI() {
     // These variables will need to change based on the user's response but for now I hard coded them in
     var meal = answers[0];
     // var meal = "chicken";
@@ -107,24 +107,24 @@ function callRecipeAPI(){
     // console.log(diet);
     // console.log(alcohol);
     // console.log(cookingTools);
-  
+
     // spoonacular URL
     // var APIkey = "b76df6aa9f3f42a2850529cba2ce87ae";
     var APIkey = "674f6fda78664e8d8eb605383a63dc97"; //This is a second APIKey if we have too many calls
     var queryURL = "https://api.spoonacular.com/recipes/complexSearch?query=" + meal + "&cuisine=" + cuisine + "&number=1&addRecipeInformation=true&addRecipeNutrition=true&apiKey=" + APIkey;
-  
+
     // AJAX call spoonacular API
     $.ajax({
         url: queryURL,
         method: "GET"
-    }).then(function(response) {
-  
+    }).then(function (response) {
+
         // Log the queryURL and response
         console.log(queryURL);
         console.log(response);
 
         // Below is an example of displaying to the results page. It will need to be modified according to our results page
-  
+
         // $(".recipe-title1").text(response.results[0].title);
         // $(".recipe-image1").attr("src",response.results[0].image);
         // $(".cook-time1").text("Time: " + response.results[0].readyInMinutes + " minutes");
@@ -136,11 +136,53 @@ function callRecipeAPI(){
         // $(".recipe-url1").text("Recipe Link")
         // $(".recipe-url1").attr("href",response.results[0].sourceUrl)
         // var recipeId = response.results[0].id;
-        })
+    })
 }
 
-function callRestaurantAPI(){
+function callRestaurantAPI() {
     console.log("hello");
+
+    // document.querySelector('#search-btn').addEventListener('submit', function (event) {
+    //     event.preventDefault()
+    //     var searchTerm = document.querySelector('#search-term').value.trim()
+    //     console.log(searchTerm);
+    //     // var key = "0494ac0d19d3768669eba3cb4cc8a747";
+    //     // var city = "Salt Lake City";
+
+    //     var queryURL = "https://developers.zomato.com/api/v2.1/locations?query=" + searchTerm;
+
+    //     $.ajax({
+    //         url: queryURL,
+    //         method: "GET",
+    //         headers: {
+    //             "user-key": "0494ac0d19d3768669eba3cb4cc8a747",
+    //             "content-type": "application/json",
+    //         }
+    //     }).then(function (cityLatLong) {
+    //         console.log(queryURL);
+    //         console.log(cityLatLong);
+
+    //         console.log(cityLatLong.location_suggestions[0].latitude);
+    //         console.log(cityLatLong.location_suggestions[0].longitude);
+
+    //         var latitude = cityLatLong.location_suggestions[0].latitude;
+    //         var longitude = cityLatLong.location_suggestions[0].longitude;
+
+    //         var restURL = "https://developers.zomato.com/api/v2.1/search?lat=" + latitude + "&lon=" + longitude;
+
+    //         $.ajax({
+    //             url: restURL,
+    //             method: "GET",
+    //             headers: {
+    //                 "user-key": "0494ac0d19d3768669eba3cb4cc8a747",
+    //                 "content-type": "application/json",
+    //             }
+    //         }).then(function (restaurantAPI) {
+    //             console.log(restaurantAPI);
+    //         })
+    //     })
+
+    // })
     // // These variables will need to change based on the user's response but for now I hard coded them in
     // var meal = answers[0];
     // // var meal = "chicken";
@@ -155,34 +197,34 @@ function callRestaurantAPI(){
     // console.log(diet);
     // console.log(alcohol);
     // console.log(cookingTools);
-  
+
     // spoonacular URL
     // var APIkey = "b76df6aa9f3f42a2850529cba2ce87ae";
     // var APIkey = "674f6fda78664e8d8eb605383a63dc97"; //This is a second APIKey if we have too many calls
     // var queryURL = "https://api.spoonacular.com/recipes/complexSearch?query=" + meal + "&cuisine=" + cuisine + "&number=1&addRecipeInformation=true&addRecipeNutrition=true&apiKey=" + APIkey;
-  
+
     // AJAX call spoonacular API
     // $.ajax({
     //     url: queryURL,
     //     method: "GET"
     // }).then(function(response) {
-  
+
     //     // Log the queryURL and response
     //     console.log(queryURL);
     //     console.log(response);
 
-        // Below is an example of displaying to the results page. It will need to be modified according to our results page
-  
-        // $(".recipe-title1").text(response.results[0].title);
-        // $(".recipe-image1").attr("src",response.results[0].image);
-        // $(".cook-time1").text("Time: " + response.results[0].readyInMinutes + " minutes");
-        // $(".servings1").text("Servings: " + response.results[0].servings);
-        // $(".calories1").text("Calories: " + response.results[0].nutrition.nutrients[0].amount + " cal");
-        // $(".carbs1").text("Carbohydrates: " + response.results[0].nutrition.nutrients[3].amount + " g");
-        // $(".protein1").text("Protein: " + response.results[0].nutrition.nutrients[8].amount + " g");
-        // $(".fat1").text("Fat: " + response.results[0].nutrition.nutrients[1].amount + " g");
-        // $(".recipe-url1").text("Recipe Link")
-        // $(".recipe-url1").attr("href",response.results[0].sourceUrl)
-        // var recipeId = response.results[0].id;
-        // })
+    // Below is an example of displaying to the results page. It will need to be modified according to our results page
+
+    // $(".recipe-title1").text(response.results[0].title);
+    // $(".recipe-image1").attr("src",response.results[0].image);
+    // $(".cook-time1").text("Time: " + response.results[0].readyInMinutes + " minutes");
+    // $(".servings1").text("Servings: " + response.results[0].servings);
+    // $(".calories1").text("Calories: " + response.results[0].nutrition.nutrients[0].amount + " cal");
+    // $(".carbs1").text("Carbohydrates: " + response.results[0].nutrition.nutrients[3].amount + " g");
+    // $(".protein1").text("Protein: " + response.results[0].nutrition.nutrients[8].amount + " g");
+    // $(".fat1").text("Fat: " + response.results[0].nutrition.nutrients[1].amount + " g");
+    // $(".recipe-url1").text("Recipe Link")
+    // $(".recipe-url1").attr("href",response.results[0].sourceUrl)
+    // var recipeId = response.results[0].id;
+    // })
 }
