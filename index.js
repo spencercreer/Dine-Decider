@@ -9,6 +9,7 @@ var searchTerm = document.getElementById("search-term");
 var searchInput = document.getElementById("search-input");
 var searchBtn = document.getElementById("search-btn");
 var questionsPage = document.getElementById("questions-page");
+var resultsPage = document.getElementById("results-page")
 var eatHomeBtn = document.getElementById("eat-home-btn");
 var eatHome;
 var eatOut;
@@ -54,18 +55,21 @@ nextButton.addEventListener("click", function (event) {
     var selectedOption = document.querySelector('input[type=radio]:checked');
     answers.push(selectedOption.value)
     console.log(answers);
+    console.log(currentQuestion);
+    console.log(questions.length)
     if (currentQuestion < questions.length) {
         document.getElementById("control").innerHTML = "";
         getQuestions(currentQuestion, questions);
     } else {
-        if (eatHome === true) {
+        if (eatHome == true) {
+            console.log("hit")
             callRecipeAPI();
-        } else if (eatOut === true) {
+        } else {
             callRestaurantAPI();
         }
-        // Hide questionsPage and show resultsPage
-
-        // call recipeAPI
+        questionsPage.setAttribute("class", "hide");
+        startScreen.setAttribute("class", "hide");
+        resultsPage.setAttribute("class", "show")
     }
 
 });
@@ -101,6 +105,7 @@ searchBtn.addEventListener("click", function (event) {
 
 // Gets recipe data from the spoonacular API
 function callRecipeAPI() {
+    console.log("Ouch")
     // These variables will need to change based on the user's response but for now I hard coded them in
     var meal = answers[0];
     // var meal = "chicken";
@@ -133,17 +138,17 @@ function callRecipeAPI() {
 
         // Below is an example of displaying to the results page. It will need to be modified according to our results page
 
-        // $(".recipe-title1").text(response.results[0].title);
-        // $(".recipe-image1").attr("src",response.results[0].image);
-        // $(".cook-time1").text("Time: " + response.results[0].readyInMinutes + " minutes");
-        // $(".servings1").text("Servings: " + response.results[0].servings);
-        // $(".calories1").text("Calories: " + response.results[0].nutrition.nutrients[0].amount + " cal");
-        // $(".carbs1").text("Carbohydrates: " + response.results[0].nutrition.nutrients[3].amount + " g");
-        // $(".protein1").text("Protein: " + response.results[0].nutrition.nutrients[8].amount + " g");
-        // $(".fat1").text("Fat: " + response.results[0].nutrition.nutrients[1].amount + " g");
-        // $(".recipe-url1").text("Recipe Link")
-        // $(".recipe-url1").attr("href",response.results[0].sourceUrl)
-        // var recipeId = response.results[0].id;
+        $(".result-title").text(response.results[0].title);
+        $(".result-image").attr("src",response.results[0].image);
+        $(".result-li1").text("Time: " + response.results[0].readyInMinutes + " minutes");
+        $(".result-li2").text("Servings: " + response.results[0].servings);
+        $(".result-li3").text("Calories: " + response.results[0].nutrition.nutrients[0].amount + " cal");
+        $(".result-li4").text("Carbohydrates: " + response.results[0].nutrition.nutrients[3].amount + " g");
+        $(".result-li5").text("Protein: " + response.results[0].nutrition.nutrients[8].amount + " g");
+        $(".result-li6").text("Fat: " + response.results[0].nutrition.nutrients[1].amount + " g");
+        $(".result-url").text("Recipe Link");
+        $(".result-url").attr("href",response.results[0].sourceUrl);
+        
     })
 }
 
