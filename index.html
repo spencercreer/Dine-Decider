@@ -10,21 +10,31 @@
 </head>
 
 <body>
-  <section class="section">
-    <!-- Navbar container -->
-    <div class="container">
-      <nav class="navbar is-light" role="navigation" aria-label="main navigation" style="background-color: #AAF0E5">
-        <div class="navbar-brand">
-          <!-- Navbar logo image -->
-          <a class="navbar-item py-1" href="./index.html" width="200">
-            <img src="assets/Logo-color-cropped2.png" alt="Decider Diner Logo">
-          </a>
-          <!-- Navbar links -->
-          <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-          </a>
+    <section class="section">
+        <!-- Navbar container -->
+        <div class="container">
+            <nav class="navbar is-light" role="navigation" aria-label="main navigation" style="background-color: #AAF0E5">
+                <div class="navbar-brand">
+                    <!-- Navbar logo image -->
+                    <a class="navbar-item py-1" href="./index.html" width="200">
+                        <img src="assets/Logo-color-cropped2.png"
+                            alt="Decider Diner Logo">
+                    </a>
+                    <!-- Navbar links -->
+                    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                    </a>
+                </div>
+                <div id="navbarBasicExample" class="navbar-menu">
+                    <div class="navbar-end">
+                      <a id="previous-sug" class="navbar-item mt-1 mx-3 float-right" style="font-family: Magneto; font-size: 20px; color:#F01D05;">
+                        <strong>Previous Suggestions</strong>
+                      </a>
+                    </div>
+                </div>
+            </nav>
         </div>
       </nav>
     </div>
@@ -80,17 +90,24 @@
           </div>
           <button class="modal-close is-large" aria-label="close"></button>
         </div>
-      </div>
-      <!-- Results Page -->
-      <div id="results-page" class="container hide">
-        <h1 class="title has-text-centered" style="font-family: Magneto; font-size:48px; color: #F01D05;">Decider Diner
-          Menu</h1>
-        <div id="result-suggestions" class="columns is-multiline is-mobile">
-        </div>
-      </div>
 
     </div>
-  </section>
+    <!-- Results Page -->
+    <div id="results-page" class="container hide">
+      <h1 class="title has-text-centered" style="font-family: Magneto; font-size:48px; color: #F01D05;">Decider Diner
+        Menu</h1>
+      <div id="result-suggestions" class="columns is-multiline is-mobile">
+      </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="content has-text-centered">
+      <p>
+        <strong>Decider Diner</strong> was coded by <a href="">Gerriss Gailey</a>, <a href="">Ken Tran</a>, <a href="">Melissa Salamah</a>, and <a href="https://github.com/spencercreer">Spencer Creer</a> using <a href="https://bulma.io/">Bulma</a>.
+      </p>
+    </div>
+  </footer>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="questions.js"></script>
   <script src="index.js"></script>

@@ -16,11 +16,32 @@ var eatHome;
 var eatOut;
 var eatOutBtn = document.getElementById("eat-out-btn");
 var nextButton = document.getElementById("next-button");
+var previousSugEl = document.getElementById("previous-sug");
 var costSign = ["$", "$$", "$$$", "$$$$", "$$$$$"];
 
 
 // variables for question values
 var displayQuestion = document.getElementById("question");
+
+previousSugEl.addEventListener("click", function () {
+    if(!localStorage.getItem("Responses")){
+        alert("You do have not had any previous suggestions.")
+    } else{
+        answers = JSON.parse(localStorage.getItem("Responses"));
+        eatHome = JSON.parse(localStorage.getItem("EatHome"));
+        searchInput = localStorage.getItem("Location");
+
+        if(eatHome === true){
+            callRecipeAPI();
+        } else{
+            callRestaurantAPI();
+        }
+         // Show results page hide questions page
+         questionsPage.setAttribute("class", "hide");
+         startScreen.setAttribute("class", "hide");
+         resultsPage.setAttribute("class", "show")
+    }
+})
 
 // cycle through the questions
 function getQuestions(questionIndex, questions) {
@@ -62,12 +83,15 @@ nextButton.addEventListener("click", function (event) {
         document.getElementById("control").innerHTML = "";
         getQuestions(currentQuestion, questions);
     } else {
-        if (eatHome == true) {
-            console.log("hit")
+        if (eatHome === true) {
             callRecipeAPI();
         } else {
             callRestaurantAPI();
         }
+        // Store user responses to local storage
+        localStorage.setItem("Responses",JSON.stringify(answers));
+        localStorage.setItem("EatHome", eatHome);
+        // Show results page hide questions page
         questionsPage.setAttribute("class", "hide");
         startScreen.setAttribute("class", "hide");
         resultsPage.setAttribute("class", "show")
@@ -86,7 +110,7 @@ eatHomeBtn.addEventListener("click", function () {
 });
 // Eat Out button, load restaurant questions, hide start screen and show questions page
 eatOutBtn.addEventListener("click", function () {
-    eatOut = true;
+    eatHome = false;
 
     startScreen.setAttribute("class", "hide");
     searchTerm.setAttribute("class", "show")
@@ -95,8 +119,8 @@ eatOutBtn.addEventListener("click", function () {
 searchBtn.addEventListener("click", function (event) {
     event.preventDefault();
     console.log(searchBtn);
-    searchInput = document.querySelector('#search-input').value.trim()
-    console.log(searchInput);
+    searchInput = document.querySelector('#search-input').value.trim();
+    localStorage.setItem("Location",searchInput);
     questions = restaurantQuestions;
     totalQuestions = questions.length;
     getQuestions(currentQuestion, questions);
@@ -106,9 +130,10 @@ searchBtn.addEventListener("click", function (event) {
 
 // Gets recipe data from the spoonacular API
 function callRecipeAPI() {
-    console.log("Ouch")
+    console.log(answers)
     // These variables will need to change based on the user's response but for now I hard coded them in
     var meal = answers[0];
+    console.log(meal);
     // var meal = "chicken";
     var cuisine = answers[1];
     var dessert = answers[2];
@@ -137,38 +162,34 @@ function callRecipeAPI() {
         console.log(queryURL);
         console.log(response);
 
-        //     $("#result-suggestions").append(`
-        //     <div class="card">
-        //         <h1 id="result-title-${i}"></h1>
-        //          <div id="resultImage-${i}">
-        //             <figure class="image is-4by3">
-        //             </figure>
-        //         </div>
-        //         <ul class="resultList">
-        //             <li id="restLocation-${i}">${restLocate}</li>
-        //             <li id="restName-${i}">${restName}</li>
-        //             <li id="restReview-${i}">${restRating}</li>
-        //             <li id="restCuisine-${i}">${cuisineAnswer}</li>
-        //             <li id="restCost-${i}">${priceRange}</li>
-        //             <li>
-        //                 <a id="restURL-${i}">${urlLink}</a>
-        //             </li>
-        //         </ul>
-        //     </div>
-        // `)
-        //     // Below is an example of displaying to the results page. It will need to be modified according to our results page
-
-        $(".result-title").text(response.results[0].title);
-        $(".result-image").attr("src", response.results[0].image);
-        $(".result-li1").text("Time: " + response.results[0].readyInMinutes + " minutes");
-        $(".result-li2").text("Servings: " + response.results[0].servings);
-        $(".result-li3").text("Calories: " + response.results[0].nutrition.nutrients[0].amount + " cal");
-        $(".result-li4").text("Carbohydrates: " + response.results[0].nutrition.nutrients[3].amount + " g");
-        $(".result-li5").text("Protein: " + response.results[0].nutrition.nutrients[8].amount + " g");
-        $(".result-li6").text("Fat: " + response.results[0].nutrition.nutrients[1].amount + " g");
-        $(".result-url").text("Recipe Link");
-        $(".result-url").attr("href", response.results[0].sourceUrl);
-
+         // Display recipeAPI response to results page
+        for(let i = 0; i < 1; i++){
+            $("#result-suggestions").append(`
+            <div class="column is-one-third"
+                <div class="card is-centered">
+                    <div class="card-header">
+                    <h1 class="card-header-title is-size-4" id="result-title-${i}">${response.results[0].title}</h1>
+                    </div>
+                    <div class="card-image">
+                        <figure class="image result-image-${i}">
+                            <img src="${response.results[0].image}" alt="${response.results[0].title} image">
+                        </figure>
+                     </div>
+                    <div class="card-content">
+                    <ul class="resultList">
+                        <li id="restLocation-${i}">Calories: ${response.results[0].nutrition.nutrients[0].amount} cal</li>
+                        <li id="restCuisine-${i}">Cabs: ${response.results[0].nutrition.nutrients[3].amount} g</li>
+                        <li id="restCost-${i}">Protein: ${response.results[0].nutrition.nutrients[8].amount} g</li>
+                        <li id="restReview-${i}">Fat: ${response.results[0].nutrition.nutrients[1].amount} g</li>
+                        <li id="restReview-${i}">Total Time: ${response.results[0].readyInMinutes} minutes</li>
+                        <li id="restReview-${i}">Sevings: ${response.results[0].servings}</li>
+                        <li><a id="restURL-${i}" href="${response.results[0].sourceUrl}">${response.results[0].title}</a></li>
+                    </ul>
+                    </div>
+                </div>
+            </div>
+        `);
+        }
     })
 }
 
@@ -215,7 +236,6 @@ function callRestaurantAPI() {
         var cityType = cityInfo.location_suggestions[0].entity_type;
         var latitude = cityInfo.location_suggestions[0].latitude;
         var longitude = cityInfo.location_suggestions[0].longitude;
-
 
         var restURL2 = "https://developers.zomato.com/api/v2.1/search?lat=" + latitude + "&lon=" + longitude + "&cuisines=" + cuisineId;
 
