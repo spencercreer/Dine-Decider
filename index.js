@@ -16,6 +16,7 @@ var eatHome;
 var eatOut;
 var eatOutBtn = document.getElementById("eat-out-btn");
 var nextButton = document.getElementById("next-button");
+var costSign = ["$", "$$", "$$$", "$$$$", "$$$$$"];
 
 
 // variables for question values
@@ -24,8 +25,9 @@ var displayQuestion = document.getElementById("question");
 // cycle through the questions
 function getQuestions(questionIndex, questions) {
     var runQuestions = questions[questionIndex];
-    console.log(runQuestions);
+
     displayQuestion.textContent = runQuestions.questionText
+    displayQuestion.setAttribute("class", "is-size-3");
 
     var choices = questions[questionIndex].choices
 
@@ -39,6 +41,7 @@ function getQuestions(questionIndex, questions) {
 
         spanItem.textContent = " " + newItem;
         spanItem.setAttribute('for', newItem)
+        spanItem.setAttribute("class", "is-size-5");
         inputItem.setAttribute('name', questions[questionIndex].questionText);
         divItem.setAttribute('class', 'block mb-1')
 
@@ -55,9 +58,6 @@ nextButton.addEventListener("click", function (event) {
     currentQuestion++;
     var selectedOption = document.querySelector('input[type=radio]:checked');
     answers.push(selectedOption.value)
-    console.log(answers);
-    console.log(currentQuestion);
-    console.log(questions.length)
     if (currentQuestion < questions.length) {
         document.getElementById("control").innerHTML = "";
         getQuestions(currentQuestion, questions);
@@ -137,10 +137,29 @@ function callRecipeAPI() {
         console.log(queryURL);
         console.log(response);
 
-        // Below is an example of displaying to the results page. It will need to be modified according to our results page
+        //     $("#result-suggestions").append(`
+        //     <div class="card">
+        //         <h1 id="result-title-${i}"></h1>
+        //          <div id="resultImage-${i}">
+        //             <figure class="image is-4by3">
+        //             </figure>
+        //         </div>
+        //         <ul class="resultList">
+        //             <li id="restLocation-${i}">${restLocate}</li>
+        //             <li id="restName-${i}">${restName}</li>
+        //             <li id="restReview-${i}">${restRating}</li>
+        //             <li id="restCuisine-${i}">${cuisineAnswer}</li>
+        //             <li id="restCost-${i}">${priceRange}</li>
+        //             <li>
+        //                 <a id="restURL-${i}">${urlLink}</a>
+        //             </li>
+        //         </ul>
+        //     </div>
+        // `)
+        //     // Below is an example of displaying to the results page. It will need to be modified according to our results page
 
         $(".result-title").text(response.results[0].title);
-        $(".result-image").attr("src",response.results[0].image);
+        $(".result-image").attr("src", response.results[0].image);
         $(".result-li1").text("Time: " + response.results[0].readyInMinutes + " minutes");
         $(".result-li2").text("Servings: " + response.results[0].servings);
         $(".result-li3").text("Calories: " + response.results[0].nutrition.nutrients[0].amount + " cal");
@@ -148,16 +167,14 @@ function callRecipeAPI() {
         $(".result-li5").text("Protein: " + response.results[0].nutrition.nutrients[8].amount + " g");
         $(".result-li6").text("Fat: " + response.results[0].nutrition.nutrients[1].amount + " g");
         $(".result-url").text("Recipe Link");
-        $(".result-url").attr("href",response.results[0].sourceUrl);
-        
+        $(".result-url").attr("href", response.results[0].sourceUrl);
+
     })
 }
 
 function callRestaurantAPI() {
-    console.log("hello");
 
     var meal = answers[0];
-    // var meal = "chicken";
     var cuisineId = 0;
     var cuisineAnswer = answers[1];
     switch (cuisineAnswer) {
@@ -196,8 +213,6 @@ function callRestaurantAPI() {
 
         var cityId = cityInfo.location_suggestions[0].entity_id;
         var cityType = cityInfo.location_suggestions[0].entity_type;
-
-
         var latitude = cityInfo.location_suggestions[0].latitude;
         var longitude = cityInfo.location_suggestions[0].longitude;
 
@@ -213,50 +228,59 @@ function callRestaurantAPI() {
             }
         }).then(function (restaurantAPI2) {
             console.log(restURL2);
-            console.log(restaurantAPI2);
+            // console.log(restaurantAPI2);
 
             for (let i = 0; i < restaurantAPI2.restaurants.length; i++) {
                 var highlights = restaurantAPI2.restaurants[i].restaurant.highlights;
                 var restName = restaurantAPI2.restaurants[i].restaurant.name;
                 var urlLink = restaurantAPI2.restaurants[i].restaurant.url;
-
+                var restRating = restaurantAPI2.restaurants[i].restaurant.user_rating.aggregate_rating
+                var restLocate = restaurantAPI2.restaurants[i].restaurant.location.address
+                var priceRange = restaurantAPI2.restaurants[i].restaurant.price_range;
+                
                 if (meal && alcohol === "Yes" && takeOut === "Takeout") {
                     if (highlights.includes(meal) && (highlights.includes("Serves Alcohol")) && (highlights.includes("Takeaway Available"))) {
-                        console.log(restName, highlights);
                     }
-                }else if (meal && alcohol === "Yes" && takeOut === "Dine-In") {
+                } else if (meal && alcohol === "Yes" && takeOut === "Dine-In") {
                     if (highlights.includes(meal) && (highlights.includes("Serves Alcohol"))) {
-                        console.log(restName, highlights);
                     }
-                }else if (meal && alcohol === "No" && takeOut === "Takeout") {
+                } else if (meal && alcohol === "No" && takeOut === "Takeout") {
                     if (highlights.includes(meal) && (highlights.includes("Takeaway Available"))) {
-                        console.log(restName, highlights);
                     }
-                }else if (meal && alcohol === "No" && takeOut === "Dine-In") {
+                } else if (meal && alcohol === "No" && takeOut === "Dine-In") {
                     if (highlights.includes(meal)) {
-                        console.log(restName, highlights);
                     }
-                // }else if (meal && alcohol === "Yes") {
-                //     if (highlights.includes(meal) && (highlights.includes("Serves Alcohol"))) {
-                //         console.log(restName, highlights);
-                //     }
-                }else if (highlights.includes(meal) && (highlights.includes("Serves Alcohol")) && (highlights.includes("Takeaway Available"))) {
-                    
+                    // }else if (meal && alcohol === "Yes") {
+                    //     if (highlights.includes(meal) && (highlights.includes("Serves Alcohol"))) {
+                    //         console.log(restName, highlights);
+                    //     }
+                    // }else if (highlights.includes(meal) && (highlights.includes("Serves Alcohol")) && (highlights.includes("Takeaway Available"))) {
+
                     // alert("this is working");
                     // noResults.setAttribute("class", "is-active");
                     // console.log(restName, highlights);
-                    console.log("There are no results");
+                    // console.log("There are no results");
                 }
-                // if(alcohol === "Yes") {
-                //     if(highlights.includes("Serves Alcohol")) {
-                //         console.log(highlights);
-                //     }
-                // }
-
-
-                // console.log(restaurantAPI2.restaurants[i].restaurant.name)
-
-
+                $("#result-suggestions").append(`
+                        <div class="column is-one-third"
+                            <div class="card is-centered">
+                                <div class="card-header">
+                                <h1 class="card-header-title is-size-4" id="result-title-${i}">${restName}</h1>
+                                </div>
+                                <div class="card-content">
+                                <ul class="resultList">
+                                    <li id="restLocation-${i}">Location: ${restLocate}</li>
+                                    <li id="restCuisine-${i}">Cuisine: ${cuisineAnswer}</li>
+                                    <li id="restCost-${i}">Price: ${costSign[priceRange-1]}</li>
+                                    <li id="restReview-${i}">Review: ${restRating}</li>
+                                    <li>
+                                        <a id="restURL-${i}" href="${urlLink}">${restName} on Zomato</a>
+                                    </li>
+                                </ul>
+                                </div>
+                            </div>
+                        </div>
+                    `);
             }
         })
 
