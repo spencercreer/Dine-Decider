@@ -33,24 +33,23 @@ var homeQuestions= [
 var restaurantQuestions= [
     {
         questionText: "What meal is it?",
-        choices: ["Breakfast", "Lunch", "Dinner", "Brunch"]
+        choices: ["Breakfast", "Lunch", "Dinner"]
     },
 
     {
         questionText: "Which type of food are you hungry for?",
-        choices: ["American", "Italian", "Mexican"],
+        choices: ["American", "Italian", "Mexican", "Asian", "Bar Food"],
   
     },
     {
-        questionText: "What is your price range?",
-        choices: ["1", "2", "3", "4", "5"],
+        questionText: "Would you like adult beverages with your meal?",
+        choices: ["Yes", "No"],
   
     },
-
-    // {
-    //     questionText: "R Do you have a sugar craving? Would you like a desert?",
-    //     choices: ["R Yes", "No"],
-    // },
+    {
+        questionText: "Takeout or Dine-In?",
+        choices: ["Takeout", "Dine-In"],
+    },
 
     // {
     //     questionText: "R Are you on a diet?",
