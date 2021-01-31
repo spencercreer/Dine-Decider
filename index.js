@@ -16,10 +16,32 @@ var eatHome;
 var eatOut;
 var eatOutBtn = document.getElementById("eat-out-btn");
 var nextButton = document.getElementById("next-button");
+var previousSugEl = document.getElementById("previous-sug");
 
 
 // variables for question values
 var displayQuestion = document.getElementById("question");
+
+previousSugEl.addEventListener("click", function () {
+    if(!localStorage.getItem("Responses")){
+        localStorage.setItem("searchedCity","New York");
+        alert("You do have not had any previous suggestions.")
+    } else{
+        answers = JSON.parse(localStorage.getItem("Responses"));
+        eatHome = JSON.parse(localStorage.getItem("EatHome"));
+        console.log(typeof(eatHome))
+
+        if(eatHome === true){
+            callRecipeAPI();
+        } else{
+            callRestaurantAPI();
+        }
+         // Show results page hide questions page
+         questionsPage.setAttribute("class", "hide");
+         startScreen.setAttribute("class", "hide");
+         resultsPage.setAttribute("class", "show")
+    }
+})
 
 // cycle through the questions
 function getQuestions(questionIndex, questions) {
@@ -55,19 +77,19 @@ nextButton.addEventListener("click", function (event) {
     currentQuestion++;
     var selectedOption = document.querySelector('input[type=radio]:checked');
     answers.push(selectedOption.value)
-    console.log(answers);
-    console.log(currentQuestion);
-    console.log(questions.length)
     if (currentQuestion < questions.length) {
         document.getElementById("control").innerHTML = "";
         getQuestions(currentQuestion, questions);
     } else {
-        if (eatHome == true) {
-            console.log("hit")
+        if (eatHome === true) {
             callRecipeAPI();
         } else {
             callRestaurantAPI();
         }
+        // Store user responses to local storage
+        localStorage.setItem("Responses",JSON.stringify(answers));
+        localStorage.setItem("EatHome", eatHome);
+        // Show results page hide questions page
         questionsPage.setAttribute("class", "hide");
         startScreen.setAttribute("class", "hide");
         resultsPage.setAttribute("class", "show")
@@ -106,9 +128,10 @@ searchBtn.addEventListener("click", function (event) {
 
 // Gets recipe data from the spoonacular API
 function callRecipeAPI() {
-    console.log("Ouch")
+    console.log(answers)
     // These variables will need to change based on the user's response but for now I hard coded them in
     var meal = answers[0];
+    console.log(meal);
     // var meal = "chicken";
     var cuisine = answers[1];
     var dessert = answers[2];
@@ -137,8 +160,7 @@ function callRecipeAPI() {
         console.log(queryURL);
         console.log(response);
 
-        // Below is an example of displaying to the results page. It will need to be modified according to our results page
-
+        // Display API call to results page
         $(".result-title").text(response.results[0].title);
         $(".result-image").attr("src",response.results[0].image);
         $(".result-li1").text("Time: " + response.results[0].readyInMinutes + " minutes");
@@ -148,8 +170,7 @@ function callRecipeAPI() {
         $(".result-li5").text("Protein: " + response.results[0].nutrition.nutrients[8].amount + " g");
         $(".result-li6").text("Fat: " + response.results[0].nutrition.nutrients[1].amount + " g");
         $(".result-url").text("Recipe Link");
-        $(".result-url").attr("href",response.results[0].sourceUrl);
-        
+        $(".result-url").attr("href",response.results[0].sourceUrl);        
     })
 }
 
