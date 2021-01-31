@@ -9,6 +9,7 @@ var searchTerm = document.getElementById("search-term");
 var searchInput = document.getElementById("search-input");
 var searchBtn = document.getElementById("search-btn");
 var questionsPage = document.getElementById("questions-page");
+var noResults = document.getElementById("no-results");
 var resultsPage = document.getElementById("results-page")
 var eatHomeBtn = document.getElementById("eat-home-btn");
 var eatHome;
@@ -157,60 +158,110 @@ function callRestaurantAPI() {
 
     var meal = answers[0];
     // var meal = "chicken";
-    var cuisine = answers[1];
-    var dessert = answers[2];
-    var diet = answers[3];
-    var alcohol = answers[4];
-    var cookingTools = answers[5];
+    var cuisineId = 0;
+    var cuisineAnswer = answers[1];
+    switch (cuisineAnswer) {
+        case "American":
+            cuisineId = 1;
+            break;
+        case "Italian":
+            cuisineId = 55;
+            break;
+        case "Mexican":
+            cuisineId = 73;
+            break;
+        case "Asian":
+            cuisineId = 3;
+            break;
+        case "Bar Food":
+            cuisineId = 227;
+            break;
+        default:
+            break;
+    }
+    var alcohol = answers[2];
+    var takeOut = answers[3];
 
-    // document.querySelector('#search-btn').addEventListener('submit', function (event) {
-    //     event.preventDefault()
+    var queryURL = "https://developers.zomato.com/api/v2.1/locations?query=" + searchInput;
+    console.log(queryURL);
 
-        // searchInput = document.querySelector('#search-input').value.trim()
-        // console.log(searchInput);
-        
-        var queryURL = "https://developers.zomato.com/api/v2.1/locations?query=" + searchInput;
-        console.log(queryURL);
+    $.ajax({
+        url: queryURL,
+        method: "GET",
+        headers: {
+            "user-key": "0494ac0d19d3768669eba3cb4cc8a747",
+            "content-type": "application/json",
+        }
+    }).then(function (cityInfo) {
+
+        var cityId = cityInfo.location_suggestions[0].entity_id;
+        var cityType = cityInfo.location_suggestions[0].entity_type;
+
+
+        var latitude = cityInfo.location_suggestions[0].latitude;
+        var longitude = cityInfo.location_suggestions[0].longitude;
+
+
+        var restURL2 = "https://developers.zomato.com/api/v2.1/search?lat=" + latitude + "&lon=" + longitude + "&cuisines=" + cuisineId;
 
         $.ajax({
-            url: queryURL,
+            url: restURL2,
             method: "GET",
             headers: {
                 "user-key": "0494ac0d19d3768669eba3cb4cc8a747",
                 "content-type": "application/json",
             }
-        }).then(function (cityInfo) {
-            // console.log(queryURL);
+        }).then(function (restaurantAPI2) {
+            console.log(restURL2);
+            console.log(restaurantAPI2);
 
-        
-            console.log(cityInfo.location_suggestions[0].latitude);
-            console.log(cityInfo.location_suggestions[0].longitude);
-            console.log(cityInfo.location_suggestions[0].entity_id);
-            console.log(cityInfo.location_suggestions[0].entity_type);
+            for (let i = 0; i < restaurantAPI2.restaurants.length; i++) {
+                var highlights = restaurantAPI2.restaurants[i].restaurant.highlights;
+                var restName = restaurantAPI2.restaurants[i].restaurant.name;
+                var urlLink = restaurantAPI2.restaurants[i].restaurant.url;
 
-            var cityId = cityInfo.location_suggestions[0].entity_id;
-            var cityType = cityInfo.location_suggestions[0].entity_type;
-
-
-            var latitude = cityInfo.location_suggestions[0].latitude;
-            var longitude = cityInfo.location_suggestions[0].longitude;
-
-            var restURL2 = "https://developers.zomato.com/api/v2.1/search?lat=" + latitude + "&lon=" + longitude + "&cuisines=" + cuisine;
-
-            $.ajax({
-                url: restURL2,
-                method: "GET",
-                headers: {
-                    "user-key": "0494ac0d19d3768669eba3cb4cc8a747",
-                    "content-type": "application/json",
+                if (meal && alcohol === "Yes" && takeOut === "Takeout") {
+                    if (highlights.includes(meal) && (highlights.includes("Serves Alcohol")) && (highlights.includes("Takeaway Available"))) {
+                        console.log(restName, highlights);
+                    }
+                }else if (meal && alcohol === "Yes" && takeOut === "Dine-In") {
+                    if (highlights.includes(meal) && (highlights.includes("Serves Alcohol"))) {
+                        console.log(restName, highlights);
+                    }
+                }else if (meal && alcohol === "No" && takeOut === "Takeout") {
+                    if (highlights.includes(meal) && (highlights.includes("Takeaway Available"))) {
+                        console.log(restName, highlights);
+                    }
+                }else if (meal && alcohol === "No" && takeOut === "Dine-In") {
+                    if (highlights.includes(meal)) {
+                        console.log(restName, highlights);
+                    }
+                // }else if (meal && alcohol === "Yes") {
+                //     if (highlights.includes(meal) && (highlights.includes("Serves Alcohol"))) {
+                //         console.log(restName, highlights);
+                //     }
+                }else if (highlights.includes(meal) && (highlights.includes("Serves Alcohol")) && (highlights.includes("Takeaway Available"))) {
+                    
+                    // alert("this is working");
+                    // noResults.setAttribute("class", "is-active");
+                    // console.log(restName, highlights);
+                    console.log("There are no results");
                 }
-            }).then(function (restaurantAPI2) {
-                console.log(restaurantAPI2);
-                console.log(restaurantAPI2.restaurants[0].restaurant.highlights)
-            })
+                // if(alcohol === "Yes") {
+                //     if(highlights.includes("Serves Alcohol")) {
+                //         console.log(highlights);
+                //     }
+                // }
 
-            
+
+                // console.log(restaurantAPI2.restaurants[i].restaurant.name)
+
+
+            }
         })
+
+
+    })
 
     // })
 }
