@@ -11,14 +11,16 @@
 
 <body>
     <section class="section">
-        <!-- navbar container -->
+        <!-- Navbar container -->
         <div class="container">
             <nav class="navbar is-light" role="navigation" aria-label="main navigation" style="background-color: #AAF0E5">
                 <div class="navbar-brand">
-                    <a class="navbar-item" href="./index.html">
-                        <img src="assets/Logo-color-cropped.png"
+                    <!-- Navbar logo image -->
+                    <a class="navbar-item py-1" href="./index.html" width="200">
+                        <img src="assets/Logo-color-cropped2.png"
                             alt="Decider Diner Logo">
                     </a>
+                    <!-- Navbar links -->
                     <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
                         <span aria-hidden="true"></span>
                         <span aria-hidden="true"></span>
@@ -27,16 +29,19 @@
                 </div>
             </nav>
         </div>
-
-        <!-- main container for intro text, main photo, starting buttons -->
+        <!-- Start Screen -->
         <div class="container">
             <div id="start-screen" class="card show">
-                <div class="has-text-centered">
-                    The Decider Diner is where you go when you don't know what you want to eat. Click the "Eat In" button if you want recipe suggestions and click the "Eat Out" button if you would like to find local restaurants.
-                </div>
+                <!-- Title Decider Diner -->
+                <h1 class="title has-text-centered my-2" style="font-family: Magneto; font-size: 72px; color: #F01D05;"> Welcome to Decider Diner</h1>
+                <!-- Description -->
+                <div class="has-text-centered mx-5">Not sure what you want to eat? Not a problem!</div>
+                <div class="has-text-centered mx-5">The Decider Diner is where you go when you can't decide what to eat. Click the "Eat In" button if you want recipe suggestions and the "Eat Out" button if you would like to find local restaurants.</div>
+                <!-- Diner Image -->
                 <div class="card-image">
                     <figure class="image is-2by1">
                         <img id="hero-image" src="assets/Cosmic-Diner-Retro.jpg" alt="Placeholder image">
+                            <!-- Buttons Eat In and Eat Out -->
                             <div id="eat-home-div">
                                 <button id="eat-home-btn" class="button is-rounded is-danger is-large" style="background-color: #F01D05;">Eat In</button>
                             </div>
@@ -48,12 +53,13 @@
                 </div>
             </div>
             <br>
-
+            <!-- Location input and button -->
             <form id="search-term" class="hide">
                 <h2>Where are you?</h2>
                 <input type="text" id="search-input" name="city">
                 <button id="search-btn">Go</button>
             </form>
+            <!-- Questions page -->
             <div id="questions-page" class="hide">
                 <h1 id="question"></h1>
                 <br>
@@ -64,6 +70,54 @@
                     <button id="next-button" class="button is-danger"style="background-color: #F01D05;">Next</button>
                   </div>
             </div>
+            <!-- Results Page -->
+            <div id="results-page"class="container hide" >
+                <h1 class="title has-text-centered" style="font-family: Magneto; font-size:48px; color: #F01D05;">Decider Diner Menu</h1>
+                <p class="subtitle has-text-centered"><strong>Subtitle</strong></p>
+                <div class="columns">
+                  <div class="column">
+                    <!-- Fix this below-->
+                  <div class="column is-half">1st column</div>
+                  <div class="card">
+                    <h1 class="result-title">Recipe Title</h1>
+                  <div class="card-image">
+                    <figure>
+                      <img class="image result-image" src="" alt="Result image of restaurant or recipe">
+                    </figure>
+                  </div>
+                  <ul class="resultList">
+                    <li class="result-li1">Time</li>
+                    <li class="result-li2">Servings</li>
+                    <li class="result-li3">Calories</li>
+                    <li class="result-li4">Carbohydrates</li>
+                    <li class="result-li5">Protein</li>
+                    <li class="result-li6">Fat</li>  
+                  </ul>
+                  <a class="result-url"></a>
+                </div>
+              </div>
+              <div class="column">
+                <div class = resultTitle>
+                  <h1 class="result-title2">Recipe Title</h1>
+                <div class="column is-half">2nd Column</div>
+                <div class="card">
+                  <div class="resultImage">
+                    <figure class="image is-4by3">
+                      <img src="https://images.unsplash.com/photo-1603418735066-5a8986184c7d?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1189&q=80" alt="Placeholder image">
+                    </figure>
+                  </div>
+                  <ul class="resultList">
+                    <li>Location</li>
+                    <li>Reviews</li>
+                    <li>Cuisine</li>
+                    <li>$$$/$$/$ cost</li>
+                    <li>link to menu/website</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
         </div>
     </section>
