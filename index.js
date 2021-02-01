@@ -150,7 +150,7 @@ function callRecipeAPI() {
 
     // User response variables
     var foodQuery = searchInput;
-    var mealText = meal;
+    var mealText = answers[0];
     var meal = answers[0].replace(/\s+/g,'');
     var cuisine = answers[1];
     var diet = answers[2].replace(/\s+/g,'');
