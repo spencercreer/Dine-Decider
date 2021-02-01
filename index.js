@@ -142,13 +142,15 @@ searchBtn.addEventListener("click", function (event) {
     searchTerm.setAttribute("class", "hide");
 });
 
-// Gets recipe data from the spoonacular API
+// Get recipe data from the spoonacular API
 function callRecipeAPI() {
     // spoonacular API key
     var APIkey = "b76df6aa9f3f42a2850529cba2ce87ae" //This is a second APIKey if we have too many calls
     // var APIkey = "674f6fda78664e8d8eb605383a63dc97"; 
+
     // User response variables
     var foodQuery = searchInput;
+    var mealText = answers[0];
     var meal = answers[0].replace(/\s+/g,'');
     var cuisine = answers[1];
     var diet = answers[2].replace(/\s+/g,'');
@@ -170,10 +172,10 @@ function callRecipeAPI() {
             // If no response, display message to user
             document.getElementById("no-result").textContent = "We do not have any suggestions based on your responses. Try again with slightly different answers.";
         } else{
-            // Display recipeAPI response to results page
-            document.getElementById("menu").textContent = meal + " Menu";
+            // Display recipe API response to results page
+            document.getElementById("menu").textContent = mealText + " Menu";
             for(let i = 0; i < response.results.length; i++){
-                // AIP response variables
+                // API response variables
                 var recipeTitle = response.results[i].title;
                 var recipeImage = response.results[i].image;
                 var calories = response.results[i].nutrition.nutrients[0].amount;
@@ -183,6 +185,7 @@ function callRecipeAPI() {
                 var time = response.results[i].readyInMinutes;
                 var servings = response.results[i].servings;
                 var recipeURL = response.results[i].sourceUrl;
+                // Append recipe API responses as cards to results page
                $("#result-suggestions").append(`
                <div class="column is-one-third"
                    <div class="card is-centered">
@@ -213,8 +216,10 @@ function callRecipeAPI() {
     })
 }
 
+// Get restaurant data from the Zomato API
 function callRestaurantAPI() {
 
+    // Set user response variables
     var meal = answers[0];
     var cuisineId = 0;
     var cuisineAnswer = answers[1];
@@ -242,6 +247,7 @@ function callRestaurantAPI() {
 
     var queryURL = "https://developers.zomato.com/api/v2.1/locations?query=" + searchInput;
 
+    // AJAX call Zomato API
     $.ajax({
         url: queryURL,
         method: "GET",
@@ -251,13 +257,13 @@ function callRestaurantAPI() {
         }
     }).then(function (cityInfo) {
 
-        var cityId = cityInfo.location_suggestions[0].entity_id;
-        var cityType = cityInfo.location_suggestions[0].entity_type;
+        
         var latitude = cityInfo.location_suggestions[0].latitude;
         var longitude = cityInfo.location_suggestions[0].longitude;
 
         var restURL2 = "https://developers.zomato.com/api/v2.1/search?lat=" + latitude + "&lon=" + longitude + "&cuisines=" + cuisineId;
 
+        // Second AJAX call Zomato API based on lat and lon
         $.ajax({
             url: restURL2,
             method: "GET",
@@ -268,6 +274,7 @@ function callRestaurantAPI() {
         }).then(function (restaurantAPI2) {
 
             for (let i = 0; i < restaurantAPI2.restaurants.length; i++) {
+                // API response variables
                 var highlights = restaurantAPI2.restaurants[i].restaurant.highlights;
                 var restName = restaurantAPI2.restaurants[i].restaurant.name;
                 var urlLink = restaurantAPI2.restaurants[i].restaurant.url;
@@ -287,18 +294,9 @@ function callRestaurantAPI() {
                 } else if (meal && alcohol === "No" && takeOut === "Dine-In") {
                     if (highlights.includes(meal)) {
                     }
-                    // }else if (meal && alcohol === "Yes") {
-                    //     if (highlights.includes(meal) && (highlights.includes("Serves Alcohol"))) {
-                    //         console.log(restName, highlights);
-                    //     }
-                    // }else if (highlights.includes(meal) && (highlights.includes("Serves Alcohol")) && (highlights.includes("Takeaway Available"))) {
-
-                    // alert("this is working");
-                    // noResults.setAttribute("class", "is-active");
-                    // console.log(restName, highlights);
-                    // console.log("There are no results");
                 }
                 document.getElementById("menu").textContent = searchInput + " Restaurants";
+                // Append restaraunt API responses as cards to results page
                 $("#result-suggestions").append(`
                         <div class="column is-one-third"
                             <div class="card is-centered">
@@ -321,9 +319,5 @@ function callRestaurantAPI() {
                     `);
             }
         })
-
-
     })
-
-    // })
 }
