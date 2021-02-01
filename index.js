@@ -1,9 +1,11 @@
-// variables for question functionality
+// Declare Variables
 var currentQuestion = 0;
 var questions;
 var totalQuestions;
 var answers = [];
 var grabInput;
+var eatHome;
+var eatOut;
 var startScreen = document.getElementById("start-screen");
 var searchTerm = document.getElementById("search-term");
 var searchInput = document.getElementById("search-input");
@@ -12,28 +14,61 @@ var questionsPage = document.getElementById("questions-page");
 var noResults = document.getElementById("no-results");
 var resultsPage = document.getElementById("results-page")
 var eatHomeBtn = document.getElementById("eat-home-btn");
-var eatHome;
-var eatOut;
 var eatOutBtn = document.getElementById("eat-out-btn");
 var nextButton = document.getElementById("next-button");
 var previousSugEl = document.getElementById("previous-sug");
+var displayQuestion = document.getElementById("question");
 var costSign = ["$", "$$", "$$$", "$$$$", "$$$$$"];
 
+// Get next question
+function getQuestions(questionIndex, questions) {
 
-// variables for question values
-var displayQuestion = document.getElementById("question");
+    // Variables question and choices
+    var runQuestions = questions[questionIndex];
+    var choices = questions[questionIndex].choices
+    // Display question text to questions page
+    displayQuestion.textContent = runQuestions.questionText
+    displayQuestion.setAttribute("class", "is-size-3");
 
+    // Display choices to questions page
+    choices.forEach(function (newItem) {
+
+        // Create radio input and text elements for each choice
+        let inputItem = document.createElement("input");
+        let spanItem = document.createElement("label");
+        let divItem = document.createElement("div");
+        inputItem.type = "radio";
+        inputItem.value = newItem;
+        // Set attributes of choices elements
+        spanItem.textContent = " " + newItem;
+        spanItem.setAttribute('for', newItem);
+        spanItem.setAttribute("class", "is-size-5");
+        inputItem.setAttribute('name', questions[questionIndex].questionText);
+        divItem.setAttribute('class', 'block mb-1');
+        // Append elements to questions page
+        document.getElementById("control").appendChild(divItem);
+        divItem.appendChild(inputItem);
+        divItem.appendChild(spanItem);
+    })
+};
+
+// Get localStorage items and display to results page 
 previousSugEl.addEventListener("click", function () {
+
     if(!localStorage.getItem("Responses")){
-        alert("You do have not had any previous suggestions.")
+        // If no stored elements
+        alert("You do have not had any previous suggestions.");
     } else{
+        // Get localStorage items
         answers = JSON.parse(localStorage.getItem("Responses"));
         eatHome = JSON.parse(localStorage.getItem("EatHome"));
-        searchInput = localStorage.getItem("Location");
 
+        // Call correct API
         if(eatHome === true){
+            searchInput = localStorage.getItem("Food Query");
             callRecipeAPI();
         } else{
+            searchInput = localStorage.getItem("Location");
             callRestaurantAPI();
         }
          // Show results page hide questions page
@@ -43,46 +78,21 @@ previousSugEl.addEventListener("click", function () {
     }
 })
 
-// cycle through the questions
-function getQuestions(questionIndex, questions) {
-    var runQuestions = questions[questionIndex];
-
-    displayQuestion.textContent = runQuestions.questionText
-    displayQuestion.setAttribute("class", "is-size-3");
-
-    var choices = questions[questionIndex].choices
-
-    choices.forEach(function (newItem) {
-
-        let inputItem = document.createElement("input");
-        let spanItem = document.createElement("label");
-        let divItem = document.createElement("div");
-        inputItem.type = "radio";
-        inputItem.value = newItem;
-
-        spanItem.textContent = " " + newItem;
-        spanItem.setAttribute('for', newItem)
-        spanItem.setAttribute("class", "is-size-5");
-        inputItem.setAttribute('name', questions[questionIndex].questionText);
-        divItem.setAttribute('class', 'block mb-1')
-
-        document.getElementById("control").appendChild(divItem);
-        divItem.appendChild(inputItem);
-        divItem.appendChild(spanItem);
-    })
-};
-
-
-// event listener for the "Next" button on the questions
+// Event listener for the "Next" button on the questions
 nextButton.addEventListener("click", function (event) {
     event.preventDefault();
     currentQuestion++;
+
+    // Get user selection and push to answers array
     var selectedOption = document.querySelector('input[type=radio]:checked');
     answers.push(selectedOption.value)
+
     if (currentQuestion < questions.length) {
+        // Clear elements and call getQuestions function
         document.getElementById("control").innerHTML = "";
         getQuestions(currentQuestion, questions);
     } else {
+        // Call correct API
         if (eatHome === true) {
             callRecipeAPI();
         } else {
@@ -102,27 +112,31 @@ nextButton.addEventListener("click", function (event) {
 // Eat at home button, load home questions, hide start screen and show questions page
 eatHomeBtn.addEventListener("click", function () {
     eatHome = true;
-    questions = homeQuestions;
-    totalQuestions = questions.length;
-    getQuestions(currentQuestion, questions);
-    questionsPage.setAttribute("class", "show");
+    document.getElementById("search-term-title").textContent = "Enter an ingrediant or dish?";
     startScreen.setAttribute("class", "hide");
+    searchTerm.setAttribute("class", "show")
 });
 // Eat Out button, load restaurant questions, hide start screen and show questions page
 eatOutBtn.addEventListener("click", function () {
     eatHome = false;
-
+    document.getElementById("search-term-title").textContent = "Where are you?";
     startScreen.setAttribute("class", "hide");
     searchTerm.setAttribute("class", "show")
 });
 
 searchBtn.addEventListener("click", function (event) {
     event.preventDefault();
-    console.log(searchBtn);
     searchInput = document.querySelector('#search-input').value.trim();
-    localStorage.setItem("Location",searchInput);
-    questions = restaurantQuestions;
-    totalQuestions = questions.length;
+    if(eatHome === true){
+        localStorage.setItem("Food Query",searchInput);
+        questions = homeQuestions;
+        totalQuestions = questions.length;
+    } else{
+        localStorage.setItem("Location",searchInput);
+        questions = restaurantQuestions;
+        totalQuestions = questions.length; 
+    }
+
     getQuestions(currentQuestion, questions);
     questionsPage.setAttribute("class", "show");
     searchTerm.setAttribute("class", "hide");
@@ -130,27 +144,21 @@ searchBtn.addEventListener("click", function (event) {
 
 // Gets recipe data from the spoonacular API
 function callRecipeAPI() {
-    console.log(answers)
-    // These variables will need to change based on the user's response but for now I hard coded them in
-    var meal = answers[0];
-    console.log(meal);
-    // var meal = "chicken";
+    // spoonacular API key
+    var APIkey = "b76df6aa9f3f42a2850529cba2ce87ae" //This is a second APIKey if we have too many calls
+    // var APIkey = "674f6fda78664e8d8eb605383a63dc97"; 
+    // User response variables
+    var foodQuery = searchInput;
+    var meal = answers[0].replace(/\s+/g,'');
     var cuisine = answers[1];
-    var dessert = answers[2];
-    var diet = answers[3];
-    var alcohol = answers[4];
-    var cookingTools = answers[5];
-    // console.log(meal);
-    // console.log(cuisine);
-    // console.log(dessert);
-    // console.log(diet);
-    // console.log(alcohol);
-    // console.log(cookingTools);
+    var diet = answers[2].replace(/\s+/g,'');
 
-    // spoonacular URL
-    // var APIkey = "b76df6aa9f3f42a2850529cba2ce87ae";
-    var APIkey = "674f6fda78664e8d8eb605383a63dc97"; //This is a second APIKey if we have too many calls
-    var queryURL = "https://api.spoonacular.com/recipes/complexSearch?query=" + meal + "&cuisine=" + cuisine + "&number=1&addRecipeInformation=true&addRecipeNutrition=true&apiKey=" + APIkey;
+    // Set API URL key based on diet
+    if(diet === "No,IeatwhateverIwant"){
+        var queryURL = "https://api.spoonacular.com/recipes/complexSearch?query=" + foodQuery + "&type=" + meal + "&cuisine=" + cuisine + "&number=6&addRecipeInformation=true&addRecipeNutrition=true&apiKey=" + APIkey;
+    } else {
+        var queryURL = "https://api.spoonacular.com/recipes/complexSearch?query=" + foodQuery + "&type=" + meal + "&cuisine=" + cuisine + "&diet=" + diet +"&number=6&addRecipeInformation=true&addRecipeNutrition=true&apiKey=" + APIkey;
+    }
 
     // AJAX call spoonacular API
     $.ajax({
@@ -158,37 +166,49 @@ function callRecipeAPI() {
         method: "GET"
     }).then(function (response) {
 
-        // Log the queryURL and response
-        console.log(queryURL);
-        console.log(response);
-
-         // Display recipeAPI response to results page
-        for(let i = 0; i < 1; i++){
-            $("#result-suggestions").append(`
-            <div class="column is-one-third"
-                <div class="card is-centered">
-                    <div class="card-header">
-                    <h1 class="card-header-title is-size-4" id="result-title-${i}">${response.results[0].title}</h1>
-                    </div>
-                    <div class="card-image">
-                        <figure class="image result-image-${i}">
-                            <img src="${response.results[0].image}" alt="${response.results[0].title} image">
-                        </figure>
-                     </div>
-                    <div class="card-content">
-                    <ul class="resultList">
-                        <li id="restLocation-${i}">Calories: ${response.results[0].nutrition.nutrients[0].amount} cal</li>
-                        <li id="restCuisine-${i}">Cabs: ${response.results[0].nutrition.nutrients[3].amount} g</li>
-                        <li id="restCost-${i}">Protein: ${response.results[0].nutrition.nutrients[8].amount} g</li>
-                        <li id="restReview-${i}">Fat: ${response.results[0].nutrition.nutrients[1].amount} g</li>
-                        <li id="restReview-${i}">Total Time: ${response.results[0].readyInMinutes} minutes</li>
-                        <li id="restReview-${i}">Sevings: ${response.results[0].servings}</li>
-                        <li><a id="restURL-${i}" href="${response.results[0].sourceUrl}">${response.results[0].title}</a></li>
-                    </ul>
-                    </div>
-                </div>
-            </div>
-        `);
+        if(response.results.length === 0){
+            // If no response, display message to user
+            document.getElementById("no-result").textContent = "We do not have any suggestions based on your responses. Try again with slightly different answers.";
+        } else{
+            // Display recipeAPI response to results page
+            document.getElementById("menu").textContent = meal + " Menu";
+            for(let i = 0; i < response.results.length; i++){
+                // AIP response variables
+                var recipeTitle = response.results[i].title;
+                var recipeImage = response.results[i].image;
+                var calories = response.results[i].nutrition.nutrients[0].amount;
+                var carbs = response.results[i].nutrition.nutrients[3].amount;
+                var protein = response.results[i].nutrition.nutrients[8].amount;
+                var fat = response.results[i].nutrition.nutrients[1].amount;
+                var time = response.results[i].readyInMinutes;
+                var servings = response.results[i].servings;
+                var recipeURL = response.results[i].sourceUrl;
+               $("#result-suggestions").append(`
+               <div class="column is-one-third"
+                   <div class="card is-centered">
+                       <div class="card-header">
+                       <h1 class="card-header-title is-size-4" id="result-title-${i}">${recipeTitle}</h1>
+                       </div>
+                       <div class="card-image" style="background-color:lightgrey;">
+                           <figure class="image result-image-${i}">
+                               <img src="${recipeImage}" alt="${recipeTitle} image">
+                           </figure>
+                        </div>
+                       <div class="card-content">
+                       <ul class="resultList">
+                           <li id="restLocation-${i}">Calories: ${calories} cal</li>
+                           <li id="restCuisine-${i}">Carbs: ${carbs} g</li>
+                           <li id="restCost-${i}">Protein: ${protein} g</li>
+                           <li id="restReview-${i}" class="mb-2">Fat: ${fat} g</li>
+                           <li id="restReview-${i}">Total Time: ${time} minutes</li>
+                           <li id="restReview-${i}" class="mb-2">Sevings: ${servings}</li>
+                           <li>Recipe Link: <a id="restURL-${i}" href="${recipeURL}">${recipeTitle}</a></li>
+                       </ul>
+                       </div>
+                   </div>
+               </div>
+           `);
+           }
         }
     })
 }
@@ -221,7 +241,6 @@ function callRestaurantAPI() {
     var takeOut = answers[3];
 
     var queryURL = "https://developers.zomato.com/api/v2.1/locations?query=" + searchInput;
-    console.log(queryURL);
 
     $.ajax({
         url: queryURL,
@@ -247,8 +266,6 @@ function callRestaurantAPI() {
                 "content-type": "application/json",
             }
         }).then(function (restaurantAPI2) {
-            console.log(restURL2);
-            // console.log(restaurantAPI2);
 
             for (let i = 0; i < restaurantAPI2.restaurants.length; i++) {
                 var highlights = restaurantAPI2.restaurants[i].restaurant.highlights;
@@ -281,6 +298,7 @@ function callRestaurantAPI() {
                     // console.log(restName, highlights);
                     // console.log("There are no results");
                 }
+                document.getElementById("menu").textContent = searchInput + " Restaurants";
                 $("#result-suggestions").append(`
                         <div class="column is-one-third"
                             <div class="card is-centered">
@@ -294,7 +312,7 @@ function callRestaurantAPI() {
                                     <li id="restCost-${i}">Price: ${costSign[priceRange-1]}</li>
                                     <li id="restReview-${i}">Review: ${restRating}</li>
                                     <li>
-                                        <a id="restURL-${i}" href="${urlLink}">${restName} on Zomato</a>
+                                        <a id="restURL-${i}" href="${urlLink}" target="_blank">${restName} on Zomato</a>
                                     </li>
                                 </ul>
                                 </div>

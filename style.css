@@ -6,14 +6,6 @@
     display:none;
 }
 
-/* li {
-    display: inline-block;
-} */
-
-#hero-image{
-
-}
-
 #eat-home-div {
     float:left;
     width:50%;
@@ -32,7 +24,6 @@
     background-color:#aaf0e5;
     font-weight: bold;
     align-content: center;
-    
 }
 
 #result-title {

@@ -10,34 +10,32 @@
 </head>
 
 <body>
-    <section class="section">
-        <!-- Navbar container -->
-        <div class="container">
-            <nav class="navbar is-light" role="navigation" aria-label="main navigation" style="background-color: #AAF0E5">
-                <div class="navbar-brand">
-                    <!-- Navbar logo image -->
-                    <a class="navbar-item py-1" href="./index.html" width="200">
-                        <img src="assets/Logo-color-cropped2.png"
-                            alt="Decider Diner Logo">
-                    </a>
-                    <!-- Navbar links -->
-                    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
-                        <span aria-hidden="true"></span>
-                        <span aria-hidden="true"></span>
-                        <span aria-hidden="true"></span>
-                    </a>
+  <header>
+        <nav class="navbar is-light" role="navigation" aria-label="main navigation" style="background-color: #AAF0E5">
+            <div class="navbar-brand">
+                <!-- Navbar logo image -->
+                <a class="navbar-item py-1 ml-3" href="./index.html">
+                    <img src="assets/Logo-color-cropped2.png"
+                        alt="Decider Diner Logo">
+                </a>
+                <!-- Navbar links -->
+                <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
+            </div>
+            <div id="navbarBasicExample" class="navbar-menu">
+                <div class="navbar-end">
+                  <a id="previous-sug" class="navbar-item mt-1 mx-3 float-right" style="font-family: Magneto; font-size: 20px; color:#F01D05;">
+                    <strong>Previous Suggestions</strong>
+                  </a>
                 </div>
-                <div id="navbarBasicExample" class="navbar-menu">
-                    <div class="navbar-end">
-                      <a id="previous-sug" class="navbar-item mt-1 mx-3 float-right" style="font-family: Magneto; font-size: 20px; color:#F01D05;">
-                        <strong>Previous Suggestions</strong>
-                      </a>
-                    </div>
-                </div>
-            </nav>
-        </div>
-      </nav>
+            </div>
+        </nav>
     </div>
+  </header>
+    <section class="section py-5">
     <!-- Start Screen -->
     <div class="container">
       <div id="start-screen" class="card show">
@@ -46,8 +44,8 @@
           to Decider Diner</h1>
         <!-- Description -->
         <div class="has-text-centered mx-5 is-size-4">Not sure what you want to eat? Not a problem!</div>
-        <div class="has-text-centered mx-5 is-size-4">The Decider Diner is where you go when you can't decide what to eat. Click
-          the "Eat In" button if you want recipe suggestions and the "Eat Out" button if you would like to find local
+        <div class="has-text-centered mx-5 mb-4 is-size-4">The Decider Diner is where you go when you can't decide what to eat. Click
+          the "Eat In" button for recipe suggestions or the "Eat Out" button to find local
           restaurants.</div>
         <!-- Diner Image -->
         <div class="card-image">
@@ -55,11 +53,11 @@
             <img id="hero-image" src="assets/Cosmic-Diner-Retro.jpg" alt="Placeholder image">
             <!-- Buttons Eat In and Eat Out -->
             <div id="eat-home-div">
-              <button id="eat-home-btn" class="button is-rounded is-danger is-large"
+              <button id="eat-home-btn" class="button is-rounded is-large is-danger"
                 style="background-color: #F01D05;">Eat In</button>
             </div>
             <div id="eat-out-div">
-              <button id="eat-out-btn" class="button is-rounded is-danger is-large is-pulled-right"
+              <button id="eat-out-btn" class="button is-rounded is-large is-danger is-pulled-right"
                 style="background-color: #F01D05;">Eat Out</button>
             </div>
             </img>
@@ -69,15 +67,15 @@
       <br>
       <!-- Location input and button -->
       <form id="search-term" class="hide">
-        <h2 class="is-size-3">Where are you?</h2>
-        <input type="text" id="search-input" name="city">
-        <button id="search-btn">Go</button>
+        <h2 id="search-term-title" class="is-size-3"></h2>
+        <input type="text" id="search-input" name="city" style="height: 36px;">
+        <button id="search-btn" class="button is-danger" style="background-color: #F01D05; height: 36px;">Go</button>
       </form>
       <!-- Questions page -->
-      <div id="questions-page" class="hide">
+      <div id="questions-page" class="hide" style="padding-left:10%; padding-right: 10%">
         <h1 id="question"></h1>
         <br>
-        <div class="control">
+        <div class="control px-4">
           <form id="control">
           </form>
           <br>
@@ -86,7 +84,6 @@
         <div id="no-results" class="modal">
           <div class="modal-background"></div>
           <div class="modal-content">
-            <!-- Any other Bulma elements you want -->
           </div>
           <button class="modal-close is-large" aria-label="close"></button>
         </div>
@@ -94,8 +91,9 @@
     </div>
     <!-- Results Page -->
     <div id="results-page" class="container hide">
-      <h1 class="title has-text-centered" style="font-family: Magneto; font-size:48px; color: #F01D05;">Decider Diner
-        Menu</h1>
+      <h1 class="title has-text-centered mb-0" style="font-family: Magneto; font-size:48px; color: #F01D05;">Decider Diner</h1>
+      <h1 id="menu" class="title has-text-centered" style="font-family: Magneto; font-size:72px; color: #F01D05;"></h1>
+      <div id="no-result" class="has-text-centered my-3 is-size-4"></div>
       <div id="result-suggestions" class="columns is-multiline is-mobile">
       </div>
     </div>
@@ -103,9 +101,8 @@
 
 <footer class="footer">
     <div class="content has-text-centered">
-      <p>
-        <strong>Decider Diner</strong> was coded by <a href="">Gerriss Gailey</a>, <a href="">Ken Tran</a>, <a href="">Melissa Salamah</a>, and <a href="https://github.com/spencercreer">Spencer Creer</a> using <a href="https://bulma.io/">Bulma</a>.
-      </p>
+      <p class="mb-0"><strong style="font-family: Magneto; font-size: 18px;">Decider Diner</strong> was coded by <a href="" target="_blank">Gerriss Gailey</a>, <a href="" target="_blank">Ken Tran</a>, <a href="" target="_blank">Melissa Salamah</a>, and <a href="https://github.com/spencercreer" target="_blank">Spencer Creer</a></p>
+      <p class="mb-0">using <a href="https://bulma.io/" target="_blank">Bulma</a> CSS framework, <a href="https://spoonacular.com/food-api" target="_blank">Spoonacular</a> API, and <a href="https://developers.zomato.com/api" target="_blank">Zomato</a> API.</p>
     </div>
   </footer>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
