@@ -1,32 +1,18 @@
 var homeQuestions= [
     {
-        questionText: "What meal is it?",
-        choices: ["Breakfast", "Lunch", "Dinner", "Brunch", "Hangover"]
+        questionText: "What meal type would you like?",
+        choices: ["Breakfast", "Main Course", "Side Dish", "Dessert", "Appetizer", "Salad", "Snack"]
     },
 
     {
         questionText: "Which type of food are you hungry for?",
-        choices: ["African","American","British","Cajun","Caribbean","Chinese","Eastern European","European","French","German","Greek","Indian","Irish","Italian","Japanese","Jewish","Korean","Latin American","Mediterranean","Mexican","Middle Eastern","Nordic","Southern","Spanish","Thai","Vietnamese"],
+        choices: ["African","American","British","Cajun","Caribbean","Chinese", "French","German","Greek","Indian", "Italian","Japanese","Mexican","Southern","Spanish","Thai"],
   
     },
 
     {
-        questionText: "Do you have a sugar craving? Would you like a desert?",
-        choices: ["Yes", "No"],
-    },
-
-    {
         questionText: "Are you on a diet?",
-        choices: ["","Gluten Free","Ketogenic","Vegetarian","Vegan"],
-    },
-
-    {
-        questionText: "Do you want to get drunk",
-        choices: ["Yes", "No", "Maybe"],
-    },
-    {
-        questionText: "Cooking tools?",
-        choices: ["Yes", "No", "Maybe"],
+        choices: ["No, I eat whatever I want","Gluten Free","Ketogenic","Vegetarian","Vegan"],
     },
 ];
 
