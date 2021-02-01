@@ -124,9 +124,11 @@ eatOutBtn.addEventListener("click", function () {
     searchTerm.setAttribute("class", "show")
 });
 
+// Go button for location/food input
 searchBtn.addEventListener("click", function (event) {
     event.preventDefault();
     searchInput = document.querySelector('#search-input').value.trim();
+    // EatHome check and store to local storage
     if(eatHome === true){
         localStorage.setItem("Food Query",searchInput);
         questions = homeQuestions;
@@ -137,6 +139,7 @@ searchBtn.addEventListener("click", function (event) {
         totalQuestions = questions.length; 
     }
 
+    // Call getQuestions, show questions page and hide searchTerm
     getQuestions(currentQuestion, questions);
     questionsPage.setAttribute("class", "show");
     searchTerm.setAttribute("class", "hide");
