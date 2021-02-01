@@ -202,7 +202,7 @@ function callRecipeAPI() {
                            <li id="restReview-${i}" class="mb-2">Fat: ${fat} g</li>
                            <li id="restReview-${i}">Total Time: ${time} minutes</li>
                            <li id="restReview-${i}" class="mb-2">Sevings: ${servings}</li>
-                           <li>Recipe Link: <a id="restURL-${i}" href="${recipeURL}">${recipeTitle}</a></li>
+                           <li>Recipe Link: <a id="restURL-${i}" href="${recipeURL}" target="_blank">${recipeTitle}</a></li>
                        </ul>
                        </div>
                    </div>
