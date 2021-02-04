@@ -6,20 +6,6 @@
     display:none;
 }
 
-#eat-home-div {
-    float:left;
-    width:50%;
-    margin-top:-45%;
-    padding-left:20%;
-}
-
-#eat-out-div {
-    float:right;
-    width:50%;
-    margin-top:-45%;
-    padding-right:20%;
-}
-
 .card-header {
     background-color:#aaf0e5;
     font-weight: bold;
@@ -35,4 +21,8 @@
 .card-content {
     font-weight: bold;
     background-color:lightgrey;
+}
+
+button:hover{
+    opacity: 0.5;
 }
