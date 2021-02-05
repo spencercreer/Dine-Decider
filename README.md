@@ -1,5 +1,5 @@
 # Decider Diner
-A web application that helps figuring out what to eat!
+A web application that helps you decide what to eat!
 Not sure what you want to eat? Not a problem!
 The Decider Diner is where you go when you can't decide what to eat. Click the "Eat In" button if you want recipe suggestions and the "Eat Out" button if you would like to find local restaurants.
 
@@ -22,7 +22,7 @@ The Decider Diner is where you go when you can't decide what to eat. Click the "
 ## Application Preview
 ---
 
-The live deployment of this application can be found by [Clicking Here](https://kentran801.github.io/Dine-Decider/).
+The live deployment of this application can be found by [Clicking Here](https://spencercreer.github.io/Dine-Decider/).
 
 <br>
 
